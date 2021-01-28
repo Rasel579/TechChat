@@ -16,6 +16,14 @@ public class Network {
     private DataOutputStream out;
     private DataInputStream in;
 
+    private  static final String AUTH_CMD_PREFIX = "/auth";
+    private  static final String AUTHOK_CMD_PREFIX = "/authok";
+    private  static final String AUTHERR_CMD_PREFIX = "/autherr";
+    private  static final String CLIENT_MESSAGE_CMD_PREFIX = "/clientMsg";
+    private  static final String SERVER_MESSAGE_CMD_PREFIX = "/serverMsg";
+    private  static final String PRIVATE_MESSAGE_CMD_PREFIX = "/w";
+    private  static final String END_CMD_PREFIX = "/end";
+
     public Network(int port, String host) {
         this.port = port;
         this.host = host;
