@@ -67,7 +67,7 @@ public class ClientHandler {
             if (message.startsWith(END_CMD_PREFIX)) {
                 return;
             } else if (message.startsWith(PRIVATE_MESSAGE_CMD_PREFIX)) {
-                  String[] parts = message.split("\\s");
+                  String[] parts = message.split("\\s+", 3);
                   String toUsername = parts[1];
                   String privateMessage = parts[2];
                   myServer.sendPrivateMsg(this, toUsername, privateMessage);
