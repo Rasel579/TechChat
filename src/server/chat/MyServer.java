@@ -90,5 +90,15 @@ public class MyServer {
             }
         }
     }
-}
+
+    public void checkUserList() throws IOException {
+        for (ClientHandler client : clients) {
+            for (int i = 0; i < clients.size(); i++) {
+                client.sendUser(clients.get(i).getUsername());
+            }
+            }
+        }
+
+    }
+
 

@@ -7,6 +7,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 
 public class ClientHandler {
 
@@ -14,7 +15,7 @@ public class ClientHandler {
     private final Socket clientSocket;
     private DataOutputStream out;
     private DataInputStream in;
-    private String username;
+    public String username;
 
 
     private static final String AUTH_CMD_PREFIX = "/auth"; // login + pass
@@ -23,6 +24,7 @@ public class ClientHandler {
     private static final String CLIENT_MESSAGE_CMD_PREFIX = "/clientMsg"; // + message
     private static final String SERVER_MESSAGE_CMD_PREFIX = "/serverMsg"; // + message
     private static final String PRIVATE_MESSAGE_CMD_PREFIX = "/w"; // + sender + toUsername + msg
+    private  static final String USERLISTS_CMD_PREFIX = "/userlists";
     private static final String END_CMD_PREFIX = "/end"; //
 
     public ClientHandler(MyServer myServer, Socket socket) {
@@ -40,6 +42,7 @@ public class ClientHandler {
         new Thread(() -> {
             try {
                 authentication();
+                myServer.checkUserList();
                 readMessage();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -49,14 +52,15 @@ public class ClientHandler {
 
     private void authentication() throws IOException {
         while (true) {
-//            String message = in.readUTF();
-            String message = "/auth martin 1111";
+            String message = in.readUTF();
             if (message.startsWith(AUTH_CMD_PREFIX)) {
                 boolean isSuccessAuth = processAuthCommand(message);
                 if (isSuccessAuth) {
                     break;
                 }
-            } else out.writeUTF(AUTHERR_CMD_PREFIX + " ошибка авторизации");
+            } else {
+                out.writeUTF(AUTHERR_CMD_PREFIX + " ошибка авторизации");
+            }
         }
     }
 
@@ -65,7 +69,10 @@ public class ClientHandler {
             String message = in.readUTF();
             System.out.println("message | " + username + " :" + message);
             if (message.startsWith(END_CMD_PREFIX)) {
-                return;
+                String parts[] = message.split("\\s+", 2);
+                String user = parts[1];
+                myServer.unSubscribe(this);
+                myServer.checkUserList();
             } else if (message.startsWith(PRIVATE_MESSAGE_CMD_PREFIX)) {
                   String[] parts = message.split("\\s+", 3);
                   String toUsername = parts[1];
@@ -99,10 +106,15 @@ public class ClientHandler {
     public void sendMessage(String username, String message, String prefix) throws IOException {
         if(prefix.equals(PRIVATE_MESSAGE_CMD_PREFIX)){
             System.out.println(prefix + " Личное сообщение отправлено от " + username);
-            out.writeUTF(String.format("%s %s %s", prefix,username, message));
+            out.writeUTF(String.format("%s %s %s", prefix, username, message));
         } else {
-            String pref = prefix == CLIENT_MESSAGE_CMD_PREFIX ? CLIENT_MESSAGE_CMD_PREFIX : SERVER_MESSAGE_CMD_PREFIX;
+            String pref = prefix.equals(CLIENT_MESSAGE_CMD_PREFIX)  ? CLIENT_MESSAGE_CMD_PREFIX : SERVER_MESSAGE_CMD_PREFIX;
             out.writeUTF(String.format("%s %s %s", pref, username, message));
         }
+    }
+
+
+    public void sendUser(String username) throws IOException {
+        out.writeUTF(String.format("%s %s", USERLISTS_CMD_PREFIX, username));
     }
 }

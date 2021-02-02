@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.ViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.ChatController">
    <children>
       <SplitPane dividerPositions="0.8802816901408451" orientation="VERTICAL" prefHeight="456.0" prefWidth="638.0">
         <items>
@@ -34,6 +34,11 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="512.0" style="-fx-border-color: #b075ba;">
                <children>
                   <ListView fx:id="messagesListView" prefHeight="374.0" prefWidth="522.0" style="-fx-background-color: #f8edfa; -fx-border-color: #b075ba;" />
+                  <Label fx:id="usernameTitle" layoutX="338.0" layoutY="3.0" prefHeight="22.0" prefWidth="172.0" text="Label">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
         </items>
       </SplitPane>
