@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class Network {
-    private static  final int DEFAULT_SERVER_PORT = 9999;
+    private static  final int DEFAULT_SERVER_PORT = 8887;
     private  static final String DEFAULT_SERVER_HOST = "localhost";
     private  final int port;
     private  final String host;
