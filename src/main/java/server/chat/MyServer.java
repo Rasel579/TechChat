@@ -6,6 +6,7 @@ import server.chat.handler.ClientHandler;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +15,11 @@ public class MyServer {
     private final BaseAuth authservice;
     private final List<ClientHandler> clients = new ArrayList<>();
 
-    public MyServer(int port) throws IOException {
+    public MyServer(int port) throws IOException, SQLException, ClassNotFoundException {
         this.serverSocket = new ServerSocket(port);
         this.authservice = new BaseAuth();
+        authservice.connection();
+        authservice.selectAllUsers();
     }
 
     public BaseAuth getAuthservice() {
@@ -99,6 +102,17 @@ public class MyServer {
             }
         }
 
+    public void changeUsername(ClientHandler clientHandler, String username, String newUsername) throws SQLException, IOException {
+        BaseAuth.updateAuth(username, newUsername);
+        for (ClientHandler client : clients) {
+            if(client.getUsername().equals(clientHandler.getUsername())){
+                client.setUsername(newUsername);
+            }
+            client.sendUpdateList(username, newUsername);
+            String prefix = "/serverMsg";
+            client.sendMessage(newUsername, String.format("%s изменил ник на %s", username, newUsername), prefix);
+        }
     }
+}
 
 

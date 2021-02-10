@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.ChatController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.ChatController">
    <children>
       <SplitPane dividerPositions="0.8802816901408451" orientation="VERTICAL" prefHeight="456.0" prefWidth="638.0">
         <items>
@@ -33,12 +41,18 @@
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="512.0" style="-fx-border-color: #b075ba;">
                <children>
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0" />
                   <ListView fx:id="messagesListView" prefHeight="374.0" prefWidth="522.0" style="-fx-background-color: #f8edfa; -fx-border-color: #b075ba;" />
-                  <Label fx:id="usernameTitle" layoutX="338.0" layoutY="3.0" prefHeight="22.0" prefWidth="172.0" text="Label">
+                  <Label fx:id="usernameTitle" layoutX="338.0" layoutY="3.0" prefHeight="22.0" prefWidth="172.0" style="-fx-border-width: 1px; -fx-border-color: #cc47c5;" text="Label" textAlignment="CENTER" textFill="#ca4cc4">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
+                  <Button layoutX="338.0" layoutY="28.0" mnemonicParsing="false" onAction="#onChange" prefHeight="10.0" prefWidth="172.0" style="-fx-opacity: 100; -fx-background-color: #e0b8de;" text="Change Username" textAlignment="CENTER" textFill="#8c0a7d" textOverrun="WORD_ELLIPSIS">
+                     <font>
+                        <Font name="Book Antiqua" size="13.0" />
+                     </font>
+                  </Button>
                </children></AnchorPane>
         </items>
       </SplitPane>
@@ -54,7 +68,7 @@
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" onAction="#onAbout" text="About">
+          <Menu mnemonicParsing="false" onAction="#onAbout" style="-fx-margin-left: 80px;" text="About">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
             </items>

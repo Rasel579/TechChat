@@ -5,7 +5,7 @@ import java.util.Objects;
 public class User {
     private final String login;
     private final String password;
-    private final String username;
+    private String username;
 
 
     public User(String login, String password, String username) {
@@ -24,6 +24,10 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
     }
 
     @Override

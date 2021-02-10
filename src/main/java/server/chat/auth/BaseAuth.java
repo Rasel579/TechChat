@@ -1,15 +1,34 @@
 package server.chat.auth;
-
 import server.chat.User;
-
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 public class BaseAuth implements AuthService{
-    private static final List<User> clients = List.of(
-         new User("martin","1111", "Мартин_Некотов"),
-         new User("boris","2222", "Борис_Николаевич"),
-         new User("gena","3333", "Гендальф_Серый")
-    );
+    private static Connection connection;
+    private static Statement stmt;
+    private static ResultSet rs;
+    private static List<User> clients = new ArrayList<>();
+
+    public void connection() throws ClassNotFoundException, SQLException {
+        Class.forName("org.sqlite.JDBC");
+        connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/db/users.db");
+        stmt = connection.createStatement();
+    }
+
+    public void selectAllUsers() throws SQLException {
+        rs = stmt.executeQuery("SELECT * FROM users");
+        while (rs.next()){
+            clients.add(new User (rs.getString("login"), rs.getString("password"),rs.getString("username")));
+        }
+    }
+    public static void updateAuth(String username, String newUsername) throws SQLException {
+        stmt.executeUpdate(String.format("UPDATE users SET username = '%s' WHERE username = '%s'", newUsername, username));
+        for (User client : clients) {
+           if (client.getUsername().equals(username)){
+               client.setUsername(newUsername);
+           }
+        }
+    }
 
 
     @Override
@@ -30,6 +49,6 @@ public class BaseAuth implements AuthService{
 
     @Override
     public void endAuthentication() {
-        System.out.println("Окончаниеы аутенфикации");
+        System.out.println("Окончание аутенфикации");
     }
 }

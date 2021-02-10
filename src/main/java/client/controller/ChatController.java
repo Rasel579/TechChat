@@ -21,8 +21,12 @@ import java.util.List;
 
 public class ChatController {
     private Network network;
+
+
+
     @FXML
     private TextField userMessage;
+    private  NetworkChat networkChat;
 
     @FXML
     private Button sendButton;
@@ -35,6 +39,9 @@ public class ChatController {
     @FXML
     private Label usernameTitle;
     private String selectedRecipient;
+
+    public ChatController() {
+    }
 
 
     public void setNetwork(Network network){
@@ -69,6 +76,11 @@ public class ChatController {
         alert.setContentText("My Chat");
         alert.show();
 
+    }
+
+    @FXML
+    void onChange(ActionEvent actionEvent) throws IOException {
+        this.networkChat.openChangesUsername();
     }
 
     @FXML
@@ -114,5 +126,9 @@ public class ChatController {
 
     public void updateUsersList(List<String> username) {
         userListView.setItems(FXCollections.observableList(username));
+    }
+
+    public void setNetworkChat(NetworkChat networkChat) {
+        this.networkChat = networkChat;
     }
 }

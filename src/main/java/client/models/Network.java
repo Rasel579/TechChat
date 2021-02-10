@@ -34,6 +34,8 @@ public class Network {
     private  static final String PRIVATE_MESSAGE_CMD_PREFIX = "/w";
     private  static final String USERLISTS_CMD_PREFIX = "/userlists";
     private  static final String END_CMD_PREFIX = "/end";
+    private  static final String CHANGE_CMD_PREFIX = "/change";
+    private  static final String UPDATEUSERLIST_CMD_PREFIX = "/updateUserList";
 
     public Network(int port, String host) {
         this.port = port;
@@ -99,7 +101,20 @@ public class Network {
                                   chatController.updateUsersList(NetworkChat.USERS_TEST_DATA);
                               }
                           });
-                    } else {
+                    } else if(message.startsWith(UPDATEUSERLIST_CMD_PREFIX)){
+                        String[] parts = message.split("\\s+", 3);
+                        String oldUsername = parts[1];
+                        String newUsername = parts[2];
+                        for (String usersTestData : NetworkChat.USERS_TEST_DATA) {
+                            if(usersTestData.equals(oldUsername)){
+                                NetworkChat.USERS_TEST_DATA.remove(oldUsername);
+                                NetworkChat.USERS_TEST_DATA.add(newUsername);
+                            }
+                        }
+                        Platform.runLater(() -> {
+                            chatController.updateUsersList(NetworkChat.USERS_TEST_DATA);
+                        });
+                    }  else {
                         Platform.runLater(() -> {
                             System.out.println(message);
                             chatController.appendMessage("Неизвестная ошибка");
@@ -156,5 +171,11 @@ public class Network {
     public void sendPrivateMessage(String message, String recipient) throws IOException {
         String command = String.format("%s %s %s", PRIVATE_MESSAGE_CMD_PREFIX, recipient, message);
         sendMessage(command);
+    }
+
+    public void sendChangeUserName(String username, String newName) throws IOException {
+        String change = String.format("%s %s %s", CHANGE_CMD_PREFIX, username, newName);
+        sendMessage(change);
+        this.username = newName;
     }
 }

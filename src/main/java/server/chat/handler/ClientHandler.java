@@ -7,18 +7,21 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ClientHandler {
 
     private final MyServer myServer;
     private final Socket clientSocket;
+
     private DataOutputStream out;
+
     private DataInputStream in;
     public String username;
 
-
     private static final String AUTH_CMD_PREFIX = "/auth"; // login + pass
+
     private static final String AUTHOK_CMD_PREFIX = "/authok"; // + username
     private static final String AUTHERR_CMD_PREFIX = "/autherr"; // + error
     private static final String CLIENT_MESSAGE_CMD_PREFIX = "/clientMsg"; // + message
@@ -26,7 +29,8 @@ public class ClientHandler {
     private static final String PRIVATE_MESSAGE_CMD_PREFIX = "/w"; // + sender + toUsername + msg
     private  static final String USERLISTS_CMD_PREFIX = "/userlists";
     private static final String END_CMD_PREFIX = "/end"; //
-
+    private  static final String CHANGE_CMD_PREFIX = "/change";
+    private  static final String UPDATEUSERLIST_CMD_PREFIX = "/updateUserList";
     public ClientHandler(MyServer myServer, Socket socket) {
         this.myServer = myServer;
         this.clientSocket = socket;
@@ -44,7 +48,7 @@ public class ClientHandler {
                 authentication();
                 myServer.checkUserList();
                 readMessage();
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 e.printStackTrace();
             }
         }).start();
@@ -64,7 +68,7 @@ public class ClientHandler {
         }
     }
 
-    private void readMessage() throws IOException {
+    private void readMessage() throws IOException, SQLException {
         while (true) {
             String message = in.readUTF();
             System.out.println("message | " + username + " :" + message);
@@ -78,7 +82,12 @@ public class ClientHandler {
                   String toUsername = parts[1];
                   String privateMessage = parts[2];
                   myServer.sendPrivateMsg(this, toUsername, privateMessage);
-            } else myServer.broadCastMessage(message, this);
+            } else if(message.startsWith(CHANGE_CMD_PREFIX)){
+                String[] parts = message.split("\\s+");
+                String username = parts[1];
+                String newUsername = parts[2];
+                myServer.changeUsername(this, username, newUsername);
+            }  else myServer.broadCastMessage(message, this);
         }
     }
 
@@ -116,5 +125,13 @@ public class ClientHandler {
 
     public void sendUser(String username) throws IOException {
         out.writeUTF(String.format("%s %s", USERLISTS_CMD_PREFIX, username));
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void sendUpdateList(String username, String newUsername) throws IOException {
+        out.writeUTF(String.format("%s %s %s",UPDATEUSERLIST_CMD_PREFIX, username, newUsername));
     }
 }

@@ -2,6 +2,7 @@ package server;
 
 import server.chat.MyServer;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ServerApp {
     private final  static  int DEFAULT_PORT = 8887;
@@ -18,6 +19,10 @@ public class ServerApp {
             System.out.println("Ошибка создания сервера");
             e.printStackTrace();
             System.exit(1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
