@@ -3,9 +3,7 @@ package server.chat.handler;
 import server.chat.MyServer;
 import server.chat.auth.AuthService;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,6 +17,8 @@ public class ClientHandler {
 
     private DataInputStream in;
     public String username;
+
+
 
     private static final String AUTH_CMD_PREFIX = "/auth"; // login + pass
 

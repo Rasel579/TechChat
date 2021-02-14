@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
+import java.io.*;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,8 +21,9 @@ import java.util.List;
 
 public class ChatController {
     private Network network;
-
-
+    private FileReader logger;
+    private BufferedReader reader;
+    private FileWriter writer;
 
     @FXML
     private TextField userMessage;
@@ -36,10 +37,11 @@ public class ChatController {
 
     @FXML
     private ListView<String> userListView = new ListView<>();
+
     @FXML
     private Label usernameTitle;
-    private String selectedRecipient;
 
+    private String selectedRecipient;
     public ChatController() {
     }
 
@@ -50,7 +52,7 @@ public class ChatController {
 
 
     @FXML
-    void sendMessage(){
+    void sendMessage() throws IOException {
       String message = userMessage.getText();
       if(!message.isBlank()){
           appendMessage("Я " + message);
@@ -84,10 +86,22 @@ public class ChatController {
     }
 
     @FXML
-    public  void  initialize(){
+    public  void  initialize() throws IOException {
         userListView.setItems(FXCollections.observableArrayList(NetworkChat.USERS_TEST_DATA));
-        sendButton.setOnAction(event -> ChatController.this.sendMessage());
-        userMessage.setOnAction(event -> ChatController.this.sendMessage());
+        sendButton.setOnAction(event -> {
+            try {
+                ChatController.this.sendMessage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        userMessage.setOnAction(event -> {
+            try {
+                ChatController.this.sendMessage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         userListView.setCellFactory(lv -> {
             MultipleSelectionModel <String> selectionModel = userListView.getSelectionModel();
             ListCell <String> listCell = new ListCell<>();
@@ -114,10 +128,11 @@ public class ChatController {
 
 
 
-    public void appendMessage(String s) {
+    public void appendMessage(String s) throws IOException {
         String timeStamp = DateFormat.getTimeInstance().format(new Date());
         messagesListView.getItems().add(timeStamp);
         messagesListView.getItems().add(s);
+        network.writeLog(timeStamp, s);
     }
 
     public void setUsernameTitle(String username) {
@@ -130,5 +145,9 @@ public class ChatController {
 
     public void setNetworkChat(NetworkChat networkChat) {
         this.networkChat = networkChat;
+    }
+
+    public ListView<String> getMessagesListView() {
+        return messagesListView;
     }
 }

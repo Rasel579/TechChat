@@ -5,6 +5,7 @@
     import client.controller.ChangeController;
     import client.models.Network;
     import javafx.application.Application;
+    import javafx.collections.FXCollections;
     import javafx.fxml.FXMLLoader;
     import javafx.scene.Parent;
     import javafx.scene.Scene;
@@ -74,6 +75,7 @@
             primaryStage.show();
             primaryStage.setTitle(network.getUsername());
             network.waitMessage(chatController);
+            chatController.getMessagesListView().setItems(FXCollections.observableArrayList(network.getMessages()));
             chatController.setUsernameTitle(network.getUsername());
 
         }

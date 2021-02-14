@@ -26,7 +26,7 @@
                   </TextField>
                   <Button fx:id="sendButton" layoutX="524.0" layoutY="1.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="51.0" prefWidth="113.0" style="-fx-background-color: #bd95c4; -fx-border-radius: 60px;" text="Send">
                      <font>
-                        <Font size="24.0" />
+                        <Font name="System Bold Italic" size="24.0" />
                      </font>
                   </Button>
                </children>
@@ -43,14 +43,14 @@
                <children>
                   <ButtonBar prefHeight="40.0" prefWidth="200.0" />
                   <ListView fx:id="messagesListView" prefHeight="374.0" prefWidth="522.0" style="-fx-background-color: #f8edfa; -fx-border-color: #b075ba;" />
-                  <Label fx:id="usernameTitle" layoutX="338.0" layoutY="3.0" prefHeight="22.0" prefWidth="172.0" style="-fx-border-width: 1px; -fx-border-color: #cc47c5;" text="Label" textAlignment="CENTER" textFill="#ca4cc4">
+                  <Label fx:id="usernameTitle" layoutX="338.0" layoutY="3.0" prefHeight="22.0" prefWidth="172.0" style="-fx-border-width: 1px; -fx-text-fill: S; -fx-border-color: #cc47c5;" text="Label" textAlignment="CENTER" textFill="#ca4cc4">
                      <font>
-                        <Font size="15.0" />
+                        <Font name="Segoe UI Light Italic" size="15.0" />
                      </font>
                   </Label>
                   <Button layoutX="338.0" layoutY="28.0" mnemonicParsing="false" onAction="#onChange" prefHeight="10.0" prefWidth="172.0" style="-fx-opacity: 100; -fx-background-color: #e0b8de;" text="Change Username" textAlignment="CENTER" textFill="#8c0a7d" textOverrun="WORD_ELLIPSIS">
                      <font>
-                        <Font name="Book Antiqua" size="13.0" />
+                        <Font name="Segoe UI Black" size="13.0" />
                      </font>
                   </Button>
                </children></AnchorPane>
