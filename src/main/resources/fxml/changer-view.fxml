@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="currentUsername" prefHeight="259.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.ChangeController">
+   <children>
+      <Label fx:id="curUsername" layoutX="9.0" layoutY="14.0" prefHeight="54.0" prefWidth="406.0" text="Username">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="80.0" prefHeight="68.0" prefWidth="187.0" text="Введите ваше новое имя">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="exchangeUsername" layoutX="207.0" layoutY="86.0" onAction="#sendNewName" prefHeight="61.0" prefWidth="202.0" />
+      <Button layoutX="74.0" layoutY="172.0" mnemonicParsing="false" onAction="#sendNewName" prefHeight="68.0" prefWidth="245.0" text="Ok">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
