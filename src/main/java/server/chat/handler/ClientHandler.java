@@ -1,5 +1,8 @@
 package server.chat.handler;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import server.ServerApp;
 import server.chat.MyServer;
 import server.chat.auth.AuthService;
 
@@ -31,6 +34,9 @@ public class ClientHandler {
     private static final String END_CMD_PREFIX = "/end"; //
     private  static final String CHANGE_CMD_PREFIX = "/change";
     private  static final String UPDATEUSERLIST_CMD_PREFIX = "/updateUserList";
+
+    private final static Logger LOGGER = LogManager.getLogger(ClientHandler.class);
+
     public ClientHandler(MyServer myServer, Socket socket) {
         this.myServer = myServer;
         this.clientSocket = socket;
@@ -49,6 +55,7 @@ public class ClientHandler {
                 myServer.checkUserList();
                 readMessage();
             } catch (IOException | SQLException e) {
+                LOGGER.error(e.getMessage());
                 e.printStackTrace();
             }
         }).start();
@@ -77,6 +84,7 @@ public class ClientHandler {
                 String user = parts[1];
                 myServer.unSubscribe(this);
                 myServer.checkUserList();
+                LOGGER.warn("отключение сервера");
             } else if (message.startsWith(PRIVATE_MESSAGE_CMD_PREFIX)) {
                   String[] parts = message.split("\\s+", 3);
                   String toUsername = parts[1];
@@ -87,6 +95,7 @@ public class ClientHandler {
                 String username = parts[1];
                 String newUsername = parts[2];
                 myServer.changeUsername(this, username, newUsername);
+                LOGGER.info("Пользователь" + username + "поменял имя " + newUsername);
             }  else myServer.broadCastMessage(message, this);
         }
     }
@@ -101,13 +110,16 @@ public class ClientHandler {
         if (username != null) {
             if (myServer.isUsernameBusy(username)) {
                 out.writeUTF(AUTHERR_CMD_PREFIX + " этот никнейм занят");
+                LOGGER.info(username + "попытка входа");
                 return false;
             }
             out.writeUTF(AUTHOK_CMD_PREFIX + " " + username);
             myServer.subscribe(this);
+            LOGGER.info("успешная авторизация " + username);
             return true;
         } else {
             out.writeUTF(AUTHERR_CMD_PREFIX + "Логин или пароль не соответствуют");
+            LOGGER.info(AUTHERR_CMD_PREFIX + "Логин или пароль не соответствуют");
             return false;
         }
     }
@@ -116,9 +128,11 @@ public class ClientHandler {
         if(prefix.equals(PRIVATE_MESSAGE_CMD_PREFIX)){
             System.out.println(prefix + " Личное сообщение отправлено от " + username);
             out.writeUTF(String.format("%s %s %s", prefix, username, message));
+            LOGGER.info(username + "выслал личное сообщение");
         } else {
             String pref = prefix.equals(CLIENT_MESSAGE_CMD_PREFIX)  ? CLIENT_MESSAGE_CMD_PREFIX : SERVER_MESSAGE_CMD_PREFIX;
             out.writeUTF(String.format("%s %s %s", pref, username, message));
+            LOGGER.info(username + "выслал сообщение в чат");
         }
     }
 

@@ -1,5 +1,7 @@
 package server.chat;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import server.chat.auth.BaseAuth;
 import server.chat.handler.ClientHandler;
 
@@ -14,6 +16,8 @@ public class MyServer {
     private final ServerSocket serverSocket;
     private final BaseAuth authservice;
     private final List<ClientHandler> clients = new ArrayList<>();
+    private final static Logger LOGGER = LogManager.getLogger(MyServer.class);
+
 
     public MyServer(int port) throws IOException, SQLException, ClassNotFoundException {
         this.serverSocket = new ServerSocket(port);
@@ -27,18 +31,19 @@ public class MyServer {
     }
 
     public void start()  {
-        System.out.println("Cервер запущен");
+        LOGGER.info("Сервер запущен");
         try {
             while (true){
                 waitAndProcessNewClientConnection();
             }
              } catch (IOException e) {
+                LOGGER.error(e.getMessage());
                 e.printStackTrace();
             }
         }
 
     private void waitAndProcessNewClientConnection() throws IOException {
-        System.out.println("Ожидание пользователя");
+        LOGGER.info("Ожидание пользователя");
         Socket socket = serverSocket.accept();
         System.out.println("Клиент подключился");
         processClientConnection(socket);

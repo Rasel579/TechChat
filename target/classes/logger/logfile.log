@@ -1,0 +1,24 @@
+INFO  2021-02-25 20:43:52 [main] server.ServerApp (ServerApp.java:23) - dsds
+ERROR 2021-02-25 20:43:52 [main] server.ServerApp (ServerApp.java:24) - errrror
+WARN  2021-02-25 20:43:52 [main] server.ServerApp (ServerApp.java:25) - info
+WARN  2021-02-25 20:43:52 [main] server.ServerApp (ServerApp.java:31) - W
+WARN  2021-02-25 20:43:52 [main] server.ServerApp (ServerApp.java:32) - log
+INFO  2021-02-25 20:44:11 [main] server.ServerApp (ServerApp.java:23) - dsds
+ERROR 2021-02-25 20:44:11 [main] server.ServerApp (ServerApp.java:24) - errrror
+WARN  2021-02-25 20:44:11 [main] server.ServerApp (ServerApp.java:25) - info
+WARN  2021-02-25 20:44:11 [main] server.ServerApp (ServerApp.java:31) - W
+WARN  2021-02-25 20:44:11 [main] server.ServerApp (ServerApp.java:32) - log
+WARN  2021-02-25 21:02:39 [main] server.ServerApp (ServerApp.java:28) - W
+WARN  2021-02-25 21:02:39 [main] server.ServerApp (ServerApp.java:29) - log
+INFO  2021-02-25 21:03:12 [Thread-0] server.chat.handler.ClientHandler (ClientHandler.java:118) - успешная авторизация Марти
+INFO  2021-02-25 21:03:55 [Thread-1] server.chat.handler.ClientHandler (ClientHandler.java:135) - Борис_Барбарисвыслал сообщение в чат
+INFO  2021-02-25 21:03:55 [Thread-1] server.chat.handler.ClientHandler (ClientHandler.java:118) - успешная авторизация Борис_Барбарис
+INFO  2021-02-25 21:04:20 [Thread-0] server.chat.handler.ClientHandler (ClientHandler.java:131) - Мартивыслал личное сообщение
+ERROR 2021-02-25 21:04:32 [Thread-0] server.chat.handler.ClientHandler (ClientHandler.java:58) - Connection reset
+ERROR 2021-02-25 21:05:03 [Thread-2] server.chat.handler.ClientHandler (ClientHandler.java:58) - Connection reset by peer
+WARN  2021-02-25 21:09:50 [main] server.ServerApp (ServerApp.java:28) - W
+WARN  2021-02-25 21:09:50 [main] server.ServerApp (ServerApp.java:29) - log
+INFO  2021-02-25 21:09:50 [main] server.chat.MyServer (MyServer.java:34) - Сервер запущен
+INFO  2021-02-25 21:09:50 [main] server.chat.MyServer (MyServer.java:46) - Ожидание пользователя
+INFO  2021-02-25 21:10:02 [main] server.chat.MyServer (MyServer.java:46) - Ожидание пользователя
+INFO  2021-02-25 21:10:10 [Thread-0] server.chat.handler.ClientHandler (ClientHandler.java:118) - успешная авторизация Марти
