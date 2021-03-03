@@ -61,7 +61,7 @@ public class MyServer {
                 continue;
             }
             String prefix = "/serverMsg";
-            client.sendMessage(clientHandler.getUsername(), "Присоединился к чату", prefix);
+            client.sendMessage(clientHandler.getUsername(), " - Присоединился к чату ", prefix);
         }
         System.out.println(clientHandler.getUsername());
     }

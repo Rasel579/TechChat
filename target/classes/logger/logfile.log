@@ -22,3 +22,15 @@ INFO  2021-02-25 21:09:50 [main] server.chat.MyServer (MyServer.java:34) - Се�
 INFO  2021-02-25 21:09:50 [main] server.chat.MyServer (MyServer.java:46) - Ожидание пользователя
 INFO  2021-02-25 21:10:02 [main] server.chat.MyServer (MyServer.java:46) - Ожидание пользователя
 INFO  2021-02-25 21:10:10 [Thread-0] server.chat.handler.ClientHandler (ClientHandler.java:118) - успешная авторизация Марти
+INFO  2021-02-25 21:10:33 [main] server.chat.MyServer (MyServer.java:46) - Ожидание пользователя
+INFO  2021-02-25 21:10:41 [Thread-1] server.chat.handler.ClientHandler (ClientHandler.java:122) - /autherrЛогин или пароль не соответствуют
+INFO  2021-02-25 21:10:46 [Thread-1] server.chat.handler.ClientHandler (ClientHandler.java:113) - Мартипопытка входа
+INFO  2021-02-25 21:11:03 [Thread-1] server.chat.handler.ClientHandler (ClientHandler.java:135) - Борис_Барбарисвыслал сообщение в чат
+INFO  2021-02-25 21:11:03 [Thread-1] server.chat.handler.ClientHandler (ClientHandler.java:118) - успешная авторизация Борис_Барбарис
+INFO  2021-02-25 21:11:09 [Thread-1] server.chat.handler.ClientHandler (ClientHandler.java:135) - Борис_Барбарисвыслал сообщение в чат
+INFO  2021-02-25 21:11:10 [Thread-1] server.chat.handler.ClientHandler (ClientHandler.java:135) - Борис_Барбарисвыслал сообщение в чат
+INFO  2021-02-25 21:11:25 [Thread-1] server.chat.handler.ClientHandler (ClientHandler.java:131) - Борис_Барбарисвыслал личное сообщение
+WARN  2021-03-03 21:50:13 [main] server.ServerApp (ServerApp.java:28) - W
+WARN  2021-03-03 21:50:13 [main] server.ServerApp (ServerApp.java:29) - log
+INFO  2021-03-03 21:50:14 [main] server.chat.MyServer (MyServer.java:34) - Сервер запущен
+INFO  2021-03-03 21:50:14 [main] server.chat.MyServer (MyServer.java:46) - Ожидание пользователя

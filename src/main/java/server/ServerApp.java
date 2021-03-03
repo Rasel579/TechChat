@@ -25,11 +25,9 @@ public class ServerApp {
         }
 
         try {
-            LOGGER.log(Level.WARN, "W");
-            LOGGER.warn("log");
             new MyServer(port).start();
         }catch (IOException | SQLException | ClassNotFoundException e){
-            LOGGER.log(Level.getLevel("Error"),"Ошибка создания сервера" + e.toString());
+            LOGGER.log(Level.getLevel("Error"),"Ошибка создания сервера " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }

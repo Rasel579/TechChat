@@ -110,7 +110,7 @@ public class ClientHandler {
         if (username != null) {
             if (myServer.isUsernameBusy(username)) {
                 out.writeUTF(AUTHERR_CMD_PREFIX + " этот никнейм занят");
-                LOGGER.info(username + "попытка входа");
+                LOGGER.info(username + " попытка входа");
                 return false;
             }
             out.writeUTF(AUTHOK_CMD_PREFIX + " " + username);
@@ -119,7 +119,7 @@ public class ClientHandler {
             return true;
         } else {
             out.writeUTF(AUTHERR_CMD_PREFIX + "Логин или пароль не соответствуют");
-            LOGGER.info(AUTHERR_CMD_PREFIX + "Логин или пароль не соответствуют");
+            LOGGER.info(AUTHERR_CMD_PREFIX + " Логин или пароль не соответствуют");
             return false;
         }
     }
@@ -128,11 +128,11 @@ public class ClientHandler {
         if(prefix.equals(PRIVATE_MESSAGE_CMD_PREFIX)){
             System.out.println(prefix + " Личное сообщение отправлено от " + username);
             out.writeUTF(String.format("%s %s %s", prefix, username, message));
-            LOGGER.info(username + "выслал личное сообщение");
+            LOGGER.info(username + " выслал личное сообщение");
         } else {
             String pref = prefix.equals(CLIENT_MESSAGE_CMD_PREFIX)  ? CLIENT_MESSAGE_CMD_PREFIX : SERVER_MESSAGE_CMD_PREFIX;
             out.writeUTF(String.format("%s %s %s", pref, username, message));
-            LOGGER.info(username + "выслал сообщение в чат");
+            LOGGER.info(username + " выслал сообщение в чат");
         }
     }
 
