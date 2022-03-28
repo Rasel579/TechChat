@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="259.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.AuthViewController">
+   <children>
+      <TextField fx:id="loginField" layoutX="199.0" layoutY="49.0" prefHeight="60.0" prefWidth="213.0"/>
+      <Label layoutX="20.0" layoutY="49.0" prefHeight="60.0" prefWidth="127.0" text="Login" textAlignment="CENTER">
+         <font>
+            <Font size="27.0"/>
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="143.0" prefHeight="60.0" prefWidth="127.0" text="Password">
+         <font>
+            <Font size="26.0"/>
+         </font>
+      </Label>
+      <PasswordField fx:id="passwordField" layoutX="199.0" layoutY="130.0" onAction="#checkAuth" prefHeight="60.0"
+                     prefWidth="214.0"/>
+      <Button layoutX="84.0" layoutY="203.0" mnemonicParsing="false" onAction="#checkAuth" prefHeight="52.0"
+              prefWidth="282.0" text="Sign In">
+         <font>
+            <Font size="24.0"/>
+         </font>
+      </Button>
+      <Label layoutX="49.0" prefHeight="38.0" prefWidth="325.0" text="Введите свой логин и пароль"
+             textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="22.0"/>
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
